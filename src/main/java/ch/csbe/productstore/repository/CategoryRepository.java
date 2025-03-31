@@ -1,9 +1,7 @@
-package ch.csbe.productstore;
+package ch.csbe.productstore.repository;
 
-import ch.csbe.productstore.Category;
+import ch.csbe.productstore.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 }
