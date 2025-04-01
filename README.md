@@ -28,9 +28,6 @@ This is a RESTful API built with **Java Spring Boot 3.2.4**, designed to manage 
     - `GET /products`
     - `GET /categories`
 
-- Only authenticated users can create, update or delete data.
-- Only `ADMIN` users can promote other users.
-
 ---
 
 ## 🚀 Features
