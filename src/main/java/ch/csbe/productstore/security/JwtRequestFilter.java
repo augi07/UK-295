@@ -36,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             return;
         }
 
-        final String jwt = authHeader.substring(7);
+        final String jwt = authHeader.substring(7).trim();
         Claims claims = tokenService.extractAllClaims(jwt);
         String email = claims.getSubject();
 

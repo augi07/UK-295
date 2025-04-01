@@ -11,21 +11,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Set;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepo;
     private final UserMapper userMapper;
     private final TokenService tokenService;
+    private final BCryptPasswordEncoder passwordEncoder; // 👈 hinzugefügt
 
     @Override
     public TokenWrapper login(LoginRequestDto dto) {
         User user = userRepo.findByEmail(dto.getEmail())
-                .orElseThrow(() -> new InvalidCredentialsException());
+                .orElseThrow(InvalidCredentialsException::new);
 
-        if (!new BCryptPasswordEncoder().matches(dto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new InvalidCredentialsException();
         }
 
@@ -35,9 +37,18 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserShowDto register(UserCreateDto dto) {
-        User user = userMapper.toEntity(dto);
-        user.setPassword(new BCryptPasswordEncoder().encode(dto.getPassword()));
-        user.setRoles(Collections.singleton("USER"));
-        return userMapper.toShowDto(userRepo.save(user));
+        User user = User.builder()
+                .email(dto.getEmail())
+                .password(passwordEncoder.encode(dto.getPassword())) // 👈 jetzt mit Bean
+                .roles(Set.of("USER"))
+                .build();
+
+        User saved = userRepo.save(user);
+
+        UserShowDto result = new UserShowDto();
+        result.setId(saved.getId());
+        result.setEmail(saved.getEmail());
+        result.setRoles(saved.getRoles());
+        return result;
     }
 }
