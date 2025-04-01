@@ -49,8 +49,8 @@ This is a RESTful API built with **Java Spring Boot 3.2.4**, designed to manage 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourname/product-api.git
-cd product-api
+git clone https://github.com/augi07/UK-295.git
+cd UK-295
 ```
 ---
 ##  Start MariaDB and Adminer
@@ -98,9 +98,11 @@ MariaDB: `http://localhost:3307`
 Adminer: `http://localhost:8090`
 
 ---
+
 ## 👤 Author
 
 Augusto Hasenbalg  
 Berufsschule Bern | üK 295  
 📅 Release Date: `2025-04-02`
+
 ---
