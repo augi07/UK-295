@@ -1,6 +1,6 @@
 # Backend für Applikationen realisieren
 
-This is a RESTful API built with **Java Spring Boot 3.2.4**, designed to manage products and categories. It includes full JWT-based authentication, user role management, and Swagger/OpenAPI documentation.
+This is a RESTful API built with **Java Spring Boot 3.1.9**, designed to manage products and categories. It includes full JWT-based authentication, user role management, and Swagger/OpenAPI documentation.
 
 ---
 
