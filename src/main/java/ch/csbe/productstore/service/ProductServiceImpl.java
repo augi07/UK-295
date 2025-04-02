@@ -34,12 +34,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDetailDto create(ProductCreateDto dto) {
-        Product product = productMapper.toEntity(dto);
-        if (dto.getCategoryId() != null) {
-            Category category = categoryRepo.findById(dto.getCategoryId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
-            product.setCategory(category);
-        }
+        Category category = categoryRepo.findById(dto.getCategoryId())
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
+
+        Product product = Product.builder()
+                .name(dto.getName())
+                .description(dto.getDescription())
+                .price(dto.getPrice())
+                .category(category)
+                .build();
+
         return productMapper.toDetailDto(productRepo.save(product));
     }
 
